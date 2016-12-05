@@ -36,8 +36,8 @@ export default class PKCS7Encoder {
    * @returns {string|*}
    */
   static decode (text) {
-    const buffer = new Buffer(text);
-    let pad = buffer.toString().charCodeAt(buffer.length - 1);
+    const buffer = new Buffer(text, 'binary');
+    let pad = buffer[buffer.length - 1];
     if (pad < 1 || pad > 32) {
       pad = 0;
     }
