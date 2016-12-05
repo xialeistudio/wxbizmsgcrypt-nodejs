@@ -13,7 +13,7 @@ export default class PKCS7Encoder {
    * @param text
    * @returns {string}
    */
-  encode (text) {
+  static encode (text) {
     const text_length = text.length;
     //计算需要填充扽位数
     let amount_to_pad = PKCS7Encoder.block_size - (text_length % PKCS7Encoder.block_size);
@@ -35,7 +35,7 @@ export default class PKCS7Encoder {
    * @param text
    * @returns {string|*}
    */
-  decode (text) {
+  static decode (text) {
     const buffer = new Buffer(text);
     let pad = buffer.toString().charCodeAt(buffer.length - 1);
     if (pad < 1 || pad > 32) {

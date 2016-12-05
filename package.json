@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "debug": "^2.3.3",
+    "mcrypt": "^0.1.12",
     "underscore": "^1.8.3"
   }
 }

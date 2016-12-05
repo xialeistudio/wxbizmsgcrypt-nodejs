@@ -8,11 +8,10 @@ import {describe, it} from 'mocha';
 describe('PKCS7Encoder', function () {
   const text = 'aaaaaaaa';
   let encoded = null;
-  const pkcs7encoder = new PKCS7Encoder();
   it('encode', () => {
-    encoded = pkcs7encoder.encode(text);
+    encoded = PKCS7Encoder.encode(text);
   });
   it('decode', () => {
-    should(text).be.exactly(pkcs7encoder.decode(encoded));
+    should(text).be.exactly(PKCS7Encoder.decode(encoded));
   });
 });
