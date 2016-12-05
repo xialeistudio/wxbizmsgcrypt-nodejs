@@ -41,22 +41,23 @@ export default class WxBizMsgCrypt {
    * @param nonce
    * @param postData
    */
-  decryptMsg (signature, timestamp = null, nonce, postData) {
+  async decryptMsg (signature, timestamp = null, nonce, postData) {
     if (this.encodingAesKey.length !== 43) {
       throw new Error('EncodingAesKey length must be 43');
     }
     const pc = new Prpcrypt(this.encodingAesKey);
-    const json = XMLParser.extrace(postData).xml;
+    const json = await XMLParser.extrace(postData);
+    const xml = json.xml;
     if (timestamp === null) {
       timestamp = parseInt(Date.now() / 1000);
     }
 
     const encrypt = xml.Encrypt;
-    const toUserName = xml.ToUserName;
     //验证签名
     const sign = SHA1.getSHA1(this.token, timestamp, nonce, encrypt);
     if (sign != signature) {
       throw new Error('signature invalid');
     }
+    return pc.decrypt(encrypt, this.appId);
   }
 }
