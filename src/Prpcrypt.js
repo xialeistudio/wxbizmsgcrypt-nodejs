@@ -5,8 +5,6 @@
 import BufferConverter from './BufferConverter';
 import PKCS7Encoder from './PKCS7Encoder';
 import mcrypt from 'mcrypt';
-import crypto from 'crypto';
-
 export default class Prpcrypt {
 
   constructor (key) {
