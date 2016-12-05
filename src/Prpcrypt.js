@@ -5,6 +5,8 @@
 import BufferConverter from './BufferConverter';
 import PKCS7Encoder from './PKCS7Encoder';
 import mcrypt from 'mcrypt';
+import crypto from 'crypto';
+
 export default class Prpcrypt {
 
   constructor (key) {
@@ -12,7 +14,10 @@ export default class Prpcrypt {
   }
 
   getIv () {
-    return this.key.slice(0, 16);
+    const key = new Buffer(this.key, 'binary');
+    const iv = new Buffer(16);
+    key.copy(iv, 0, 0, 16);
+    return iv.toString('binary');
   }
 
   /**
