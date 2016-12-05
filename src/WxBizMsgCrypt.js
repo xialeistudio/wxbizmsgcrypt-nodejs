@@ -25,8 +25,5 @@ export default class WxBizMsgCrypt {
    * @param nonce
    */
   encryptMsg (replyMsg, timestamp, nonce) {
-    const pc = new Prpcrypt(this.encodingAesKey);
-    const result = pc.encrypt(replyMsg, this.appId);
-    debug(result);
   }
 }

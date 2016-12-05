@@ -2,17 +2,16 @@
  * @author xialeistduio<xialeistudio@gmail.com>
  * @date 16-12-5
  */
-import {Base64, PKCS7Encoder} from '../src/Prpcrypt';
+import Base64 from '../src/Base64';
 import should from 'should';
-import fs from 'fs';
 import {describe, it} from 'mocha';
-describe('Prpcrypt', function () {
-  const text = Date.now().toString();
+describe('Base64', function () {
+  const text = 'aaaaaaaa';
   let encoded = null;
-  it('Base64::encode', function () {
+  it('encode', () => {
     encoded = Base64.encode(text);
   });
-  it('Base64::decode', function () {
+  it('decode', () => {
     should(text).be.exactly(Base64.decode(encoded));
   });
 });
