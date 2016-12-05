@@ -2,9 +2,9 @@
  * @author xialeistduio<xialeistudio@gmail.com>
  * @date 16-12-5
  */
-const debug = require('debug')('WxBizMsgCrypt:WxBizMsgCrypt');
 import Prpcrypt from './Prpcrypt';
-
+import SHA1 from './SHA1';
+import XMLParser from './XMLParser';
 export default class WxBizMsgCrypt {
   /**
    * 构造方法
@@ -25,5 +25,12 @@ export default class WxBizMsgCrypt {
    * @param nonce
    */
   encryptMsg (replyMsg, timestamp, nonce) {
+    const pc = new Prpcrypt(this.encodingAesKey);
+    const encrypt = pc.encrypt(replyMsg, this.appId);
+    if (timestamp === null) {
+      timestamp = parseInt(Date.now() / 1000).toString();
+    }
+    const sign = SHA1.getSHA1(this.token, timestamp, nonce, encrypt);
+    return XMLParser.generate(encrypt, sign, timestamp, nonce);
   }
 }
