@@ -1,8 +1,9 @@
 # WxBizMsgCrypt-NodeJs
-NodeJs的微信开放平台消息加解密方案
+NodeJs的微信开放平台消息加解密方案   
 ![test](https://travis-ci.org/xialeistudio/wxbizmsgcrypt-nodejs.svg?branch=master)
 ## 开发背景
-NodeJs经过几年的发展，可以说在高并发，高实时性的应用中还是占有一席之地的。拿微信开放平台来说，如果接入消息管理的公众号比较多，而需要保持低延迟响应的话，NodeJs的优势可以说是非常明显的。
+NodeJs经过几年的发展，可以说在高并发，高实时性的应用中还是占有一席之地的。拿微信开放平台来说，如果接入消息管理的公众号比较多，而需要保持低延迟响应的话，NodeJs的优势可以说是非常明显的。   
+但是微信开放平台官网并没有提供NodeJs的开发包，所以开发了本程序。
 ## 使用方法
 ```bash
 npm install wxbizmsgcrypt --save
