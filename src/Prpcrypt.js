@@ -111,7 +111,7 @@ export default class Prpcrypt {
    */
   static getRandomString (length = 16) {
     if (process.env.NODE_ENV === 'test') {
-      return '111111111111';
+      return '1111111111111111';
     }
     const strs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
     const dist = [];
