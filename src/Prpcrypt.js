@@ -24,7 +24,7 @@ export default class Prpcrypt {
    * @param encoding
    * @returns {String}
    */
-  pack (number, encoding = 'binary') {
+  static pack (number, encoding = 'binary') {
     const buffer = new Buffer(4);
     buffer.writeUInt32BE(number);
     return buffer.toString(encoding);
@@ -36,7 +36,7 @@ export default class Prpcrypt {
    * @param encoding
    * @returns {Number}
    */
-  unpack (binary, encoding = 'binary') {
+  static unpack (binary, encoding = 'binary') {
     const buffer = new Buffer(binary, encoding);
     return buffer.readUInt32BE();
   }
@@ -48,8 +48,8 @@ export default class Prpcrypt {
    * @returns {*}
    */
   encrypt (text, appid) {
-    const random = this.getRandomString();
-    text = random + this.pack(text.length) + text + appid;
+    const random = Prpcrypt.getRandomString();
+    text = random + Prpcrypt.pack(text.length) + text + appid;
     text = PKCS7Encoder.encode(text);
     return this.aes128encrypt(text);
   }
@@ -71,7 +71,7 @@ export default class Prpcrypt {
     result.copy(content, 0, 16, result.length);
     let packBuffer = new Buffer(4);
     content.copy(packBuffer, 0, 0, 4);
-    let xml_len = this.unpack(packBuffer);
+    let xml_len = Prpcrypt.unpack(packBuffer);
     let xml_content = new Buffer(xml_len);
     content.copy(xml_content, 0, 4, xml_len + 4);
     let from_appid = new Buffer(content.length - xml_len - 4);
@@ -109,7 +109,12 @@ export default class Prpcrypt {
    * @param length
    * @returns {string}
    */
-  getRandomString (length = 16) {
-    return '1111111111111111';
+  static getRandomString (length = 16) {
+    const strs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+    const dist = [];
+    for (let i = 0; i < length; i++) {
+      dist.push(strs[Math.floor(Math.random() * strs.length)]);
+    }
+    return dist.join('');
   }
 }

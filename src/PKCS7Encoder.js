@@ -15,7 +15,7 @@ export default class PKCS7Encoder {
    */
   static encode (text) {
     const text_length = text.length;
-    //计算需要填充扽位数
+    //计算需要填充的位数
     let amount_to_pad = PKCS7Encoder.block_size - (text_length % PKCS7Encoder.block_size);
     //计算需要填充的位数
     if (amount_to_pad === 0) {
